@@ -1,7 +1,7 @@
 package com.example.SocialLoginPractice.service;
 
 import com.example.SocialLoginPractice.model.ProviderUser;
-import com.example.SocialLoginPractice.model.User;
+import com.example.SocialLoginPractice.model.user.User;
 import com.example.SocialLoginPractice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

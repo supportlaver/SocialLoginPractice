@@ -1,6 +1,9 @@
 package com.example.SocialLoginPractice.service;
 
+import com.example.SocialLoginPractice.converters.ProviderUserConverter;
+import com.example.SocialLoginPractice.converters.ProviderUserRequest;
 import com.example.SocialLoginPractice.model.*;
+import com.example.SocialLoginPractice.model.user.User;
 import com.example.SocialLoginPractice.repository.UserRepository;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +22,13 @@ public abstract class AbstractOAuth2UserService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ProviderUserConverter<ProviderUserRequest , ProviderUser> providerUserConverter;
+
 
     // 사용자를 등록하는 Method
     protected void register(ProviderUser providerUser, OAuth2UserRequest userRequest) {
+
         User user = userRepository.findByUsername(providerUser.getUsername());
 
         if (user == null) {
@@ -34,22 +41,9 @@ public abstract class AbstractOAuth2UserService {
     }
 
     // 어떤 사용자 (3가지 중에서) 로 return 할건지
-    public ProviderUser providerUser(ClientRegistration clientRegistration, OAuth2User oAuth2User) {
-
-        // 서비스 구분하기
-        String registrationId = clientRegistration.getRegistrationId();
-
-        if(registrationId.equals("keycloak")) {
-            return new KeycloakUser(oAuth2User , clientRegistration);
-
-        } else if(registrationId.equals("google")) {
-            return new GoogleUser(oAuth2User, clientRegistration);
-
-        } else if(registrationId.equals("naver")) {
-            return new NaverUser(oAuth2User, clientRegistration);
-        }
-
-        return null;
+    public ProviderUser providerUser(ProviderUserRequest providerUserRequest) {
+        ProviderUser providerUser = providerUserConverter.converter(providerUserRequest);
+        return providerUser;
     }
 
 

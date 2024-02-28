@@ -1,6 +1,6 @@
 package com.example.SocialLoginPractice.repository;
 
-import com.example.SocialLoginPractice.model.User;
+import com.example.SocialLoginPractice.model.user.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -20,8 +20,8 @@ public class UserRepository {
     }
 
     public User findByUsername(String username) {
-        if (users.containsKey("username")){
-            return (User) users.get("username");
+        if (users.containsKey(username)){
+            return (User) users.get(username);
         }
         return null;
     }

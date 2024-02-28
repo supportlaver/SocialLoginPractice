@@ -1,4 +1,4 @@
-package com.example.SocialLoginPractice.model;
+package com.example.SocialLoginPractice.model.user;
 
 // JPA 경우 여기에 이제 @Entity 가 될것
 

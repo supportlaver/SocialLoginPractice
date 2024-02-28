@@ -1,6 +1,7 @@
 package com.example.SocialLoginPractice.model;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.List;
 import java.util.Map;
@@ -16,4 +17,11 @@ public interface ProviderUser {
     List<? extends GrantedAuthority> getAuthorities();
     // 서비스 제공자로부터 받는 값들
     Map<String,Object> getAttributes();
+
+    public String getPicture();
+
+    OAuth2User getOAuth2User();
+    void isCertificated(boolean isCertificated);
+    boolean isCertificated();
 }
+
