@@ -1,7 +1,0 @@
-server:
-  port: 8081
-
-  mvc:
-    static-path-pattern: /static/**
-
-
